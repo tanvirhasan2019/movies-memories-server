@@ -25,9 +25,13 @@ app.use(cors());
 app.use('/', hellow);
 
 
+const CONNECTION_URL = 'mongodb+srv://tanvirhasan:tanvirhasan01687339737@cluster0.1avf3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
 
 const PORT = 5000;
-mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+
+
+mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
   .catch((error) => console.log(`${error} did not connect`));
 
