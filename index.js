@@ -27,7 +27,6 @@ app.use('/', hellow);
 
 const CONNECTION_URL = 'mongodb+srv://tanvirhasan:tanvirhasan01687339737@cluster0.1avf3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
-
 const PORT = 5000;
 
 
