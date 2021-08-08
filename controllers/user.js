@@ -54,3 +54,48 @@ export const signup = async (req, res) => {
     console.log(error);
   }
 };
+
+
+
+export const getUser = async (req, res) => {
+
+  const {id } = req.params;
+  console.log('id ', id)
+
+  try {
+    
+    const User = await UserModal.findById(id)
+    console.log('User ', User);
+   
+    if(User) return res.status(200).json({ data : {id : User._id , name : User.name , email: User.email, avatar:User.avatar } });
+    res.status(400).json({ data : 'User Not Found' });
+
+  } catch (err) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+
+export const UpdateProfile = async (req, res) => {
+
+  const {id } = req.params;
+  const {avatar, name, email } = req.body;
+
+  try {
+    
+    const UpdateUser = await UserModal.findById(id)
+
+    if (!UpdateUser) return res.status(404).send(`No User with id: ${id}`);
+
+    const updatedUser = { name : name , email : email , avatar: avatar };
+    await UserModal.findByIdAndUpdate(id, updatedUser, { new: true });
+   
+    res.status(200).json({ data: updatedUser });
+
+  } catch (err) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+
+
